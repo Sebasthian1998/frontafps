@@ -1,3 +1,5 @@
+import axiosClient from "config/config"
+
 // constantes
 const dataInicial = {
     array: []
@@ -16,12 +18,12 @@ export default function kitReducer(state = dataInicial, action){
     }
 }
 // actions
-export const KitsAction = (dataAxios) => async (dispatch, getState) => {
+export const KitsAction = () => async (dispatch, getState) => {
     try {
-        console.log(dataAxios)
+        const data = await axiosClient.get('/kit')
         dispatch({
             type: KIT_LIST_SUCCESS,
-            payload: dataAxios  
+            payload: data.data  
         })
     } catch (error) {
         console.log(error)

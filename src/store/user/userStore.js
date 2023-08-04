@@ -1,3 +1,6 @@
+
+import axiosClient from 'config/config'
+
 // constantes
 const dataInicial = {
     array: []
@@ -16,12 +19,12 @@ export default function userReducer(state = dataInicial, action){
     }
 }
 // actions
-export const UsersAction = (dataAxios) => async (dispatch, getState) => {
+export const UsersAction = () => async (dispatch, getState) => {
     try {
-        console.log(dataAxios)
+        const data = await axiosClient.get('/user')
         dispatch({
             type: USER_LIST_SUCCESS,
-            payload: dataAxios  
+            payload: data.data 
         })
     } catch (error) {
         console.log(error)
